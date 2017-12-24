@@ -11,9 +11,9 @@
             <MenuItem Header="文件">
                 <MenuItem Header="退出" Click="Exit_Click"/>
             </MenuItem>
-            <MenuItem Header="帮助" >
-                <MenuItem Header="关于" Click="Help_Click" />
-            </MenuItem>
+
+            <MenuItem Header="关于" Click="Help_Click" />
+
 
         </Menu>
 

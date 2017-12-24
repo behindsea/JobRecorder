@@ -55,7 +55,7 @@ namespace JobRecorder
         /// <summary>
         /// 默认用于存储视频的电脑目录
         /// </summary>
-        public const string storePath = "D:\\调车视频";
+        public string storePath;
 
         /// <summary>
         /// 背景进程，用于异步执行复制，防止卡顿（调用时注意把UI更新放在另一个进程中）
@@ -65,6 +65,19 @@ namespace JobRecorder
         public MainWindow()
         {
             InitializeComponent();
+            storePath = Properties.Settings.Default["storePath"].ToString();
+            if (!Directory.Exists(storePath))
+            {
+                MessageBox.Show("存储目录不存在，请重新设置！");
+                About about = new About();
+                about.ShowDialog();
+                storePath = Properties.Settings.Default["storePath"].ToString();
+                if (!Directory.Exists(storePath))
+                {
+                    Application.Current.Shutdown();
+                }
+            }
+
             DriveList = new List<USBDevice>();
             CopyQueue = new Queue<USBDevice>();
 
@@ -245,13 +258,34 @@ namespace JobRecorder
             switch (System.IO.Path.GetFileName(fileName).Substring(6, 1))
             {
                 case "1":
-                    num = "1.干部";
+                    num = "1号";
                     break;
                 case "2":
-                    num = "2.调车长";
+                    num = "2号";
+                    break;
+                case "3":
+                    num = "3号";
+                    break;
+                case "0":
+                    num = "0号";
                     break;
                 case "4":
-                    num = "4.连结员";
+                    num = "4号";
+                    break;
+                case "5":
+                    num = "5号";
+                    break;
+                case "6":
+                    num = "6号";
+                    break;
+                case "7":
+                    num = "7号";
+                    break;
+                case "8":
+                    num = "8号";
+                    break;
+                case "9":
+                    num = "9号";
                     break;
                 default:
                     num = "编号错误";
@@ -279,7 +313,7 @@ namespace JobRecorder
                         deviceNum = drive.Name;
                         if (File.Exists(drive.Name + "Config.ini"))
                         {
-                            string[] deviceInfo = File.ReadAllLines(drive.Name + "Config.ini",Encoding.Default);
+                            string[] deviceInfo = File.ReadAllLines(drive.Name + "Config.ini", Encoding.Default);
                             if (deviceInfo.Length > 1 && deviceInfo[0] == "调车")
                             {
                                 deviceNum = deviceInfo[1] + "号";
@@ -459,7 +493,8 @@ namespace JobRecorder
         private void Help_Click(object sender, RoutedEventArgs e)
         {
             About about = new About();
-            about.Show();
+            about.ShowDialog();
         }
+
     }
 }

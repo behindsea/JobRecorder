@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobRecorder"
         mc:Ignorable="d"
-        Title="关于" Height="300" Width="300">
-    <StackPanel>
-        <TextBlock Text="作者：张之洞
-                   时间：2017年7月3日"  Margin="10"/>
+        Title="帮助  " Height="300" Width="300" Activated="Window_Activated">
+    <StackPanel Name="panel">
+        <TextBlock Name="txtPath"></TextBlock>
+        <Button Content="选择" Name="buttonChange" Click="buttonChange_Click" Margin="0,5,0,0" />
     </StackPanel>
-
 </Window>
