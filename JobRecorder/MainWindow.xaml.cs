@@ -257,6 +257,9 @@ namespace JobRecorder
             string num = "";
             switch (System.IO.Path.GetFileName(fileName).Substring(6, 1))
             {
+                case "0":
+                    num = "0号";
+                    break;
                 case "1":
                     num = "1号";
                     break;
@@ -266,9 +269,7 @@ namespace JobRecorder
                 case "3":
                     num = "3号";
                     break;
-                case "0":
-                    num = "0号";
-                    break;
+
                 case "4":
                     num = "4号";
                     break;
@@ -291,7 +292,7 @@ namespace JobRecorder
                     num = "编号错误";
                     break;
             }
-            path = string.Format("{0}\\{1}年\\{2}月\\{3}\\{4}日", storePath, date.Year, date.Month, num, date.Day);
+            path = string.Format("{0}\\{1}年\\{2}月\\{4}日\\{3}", storePath, date.Year, date.Month, date.Day, num);
 
             return path;
         }
